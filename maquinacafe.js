@@ -1,5 +1,8 @@
 //Maquinita de café//
 
+// bebidas disponibles
+const bebidasDisponibles = ["tinto", "cafeconleche", "capuchino", "mocaccino", "te"];
+
 //Precio de cada café
 const precioTinto = 3500;
 const precioCafeconleche = 4200;
@@ -8,17 +11,11 @@ const precioMocaccino = 5000;
 const precioTe = 3800;
 
 //Stock inventario de la máquina mínimo y máximo de cada ingrediente en gramos 
-const stockMinimo = { cafeinstantaneo: 25, lecheenpolvo: 10, chocolateenpolvo: 20, te: 10, vasos: 1, agua: 200 }; //mínimo de cada ingrediente en gramos
-const stockMaximo = { cafeinstantaneo: 1000, lecheenpolvo: 1000, chocolateenpolvo: 500, te: 800, vasos: 80, agua: Infinity }; //máximo de cada ingrediente en gramos
-let stockCafeinstantaneo = 1000;                //1000 gramos de café instantáneo
-let stockLecheenpolvo = 1000;                  //1000 gramos de leche en polvo
-let stockAzucar = 500;                        //500 gramos de azúcar
-let stockChocolateenpolvo = 500;             //500 gramos de chocolate en polvo
-let stockTe = 800;                          //800 gramos de té
-let stockVasos = 80;                       //80 unidades de vasos
-let stockBilletes = 100000;                       //dinero en la máquina Billetes para la devuelta 2000, 5000, 10000.
-let stockMonedas = 20000;                    //dinero en la máquina Monedas para la devuelta 100, 200, 500.
-let agua = Infinity;                       //agua en la máquina
+const stockMinimo = { cafeinstantaneo: 25, lecheenpolvo: 10, chocolateenpolvo: 20, te: 10, vasos: 1,}; //mínimo de cada ingrediente en gramos
+const stockMaximo = { cafeinstantaneo: 1000, lecheenpolvo: 1000, chocolateenpolvo: 500, te: 800, vasos: 80, }; //máximo de cada ingrediente en gramos
+                      //80 unidades de vasos
+
+
 //preparación de cada receta por vaso en gramos
 const RECETAS = {
     tinto: { cafeinstantaneo: 25, lecheenpolvo: 0, chocolateenpolvo: 0, te: 0, agua: 150 },
@@ -30,16 +27,58 @@ const RECETAS = {
 
 
 // Dinero que acepta la máquina
-const monedas = [100, 200, 500];
-const billetes = [1000, 2000, 5000, 10000, 20000];
+const monedas = [100, 200, 500,1000];
+const billetes = [2000, 5000, 10000, 20000];
+const stockBilletes = 80000;                       //dinero en la máquina Billetes para la devuelta 2000, 5000, 10000.
+const stockMonedas = 20000;                    //dinero en la máquina Monedas para la devuelta 100, 200, 500.
 
-//Funcion principal al preparar la bebida
-function prepararBebida(bebida seleccionada, dinero ingresado) {
-    const receta = RECETAS[bebidaSeleccionada];
+//Stock de ingredientes en la máquina
+let stock = {
+    cafeinstantaneo: 1000,
+    lecheenpolvo: 1000,
+    chocolateenpolvo: 500,
+    te: 800,
+    vasos: 80
+};
+//Stock de dinero en la máquina
+let stockDinero = {
+        2000: 15,
+        5000: 4,
+        10000: 3,
+        100: 10,
+        200: 20,
+        500: 20
+    };
+let saldoDinero = 0; //Saldo de dinero ingresado por el usuario
+let ventasTotales = 0; //Ventas totales de la máquina
+let maquinaEncendida = true; //Estado de la máquina (encendida o apagada)
+
+//Funcion  caja inicio del dia para el operador
+
+function cajaInicioDia() {
+    if (stockDinero[2000] < 15 || stockDinero[5000] < 4 || stockDinero[10000] < 3 || stockDinero[100] < 10 || stockDinero[200] < 20 || stockDinero[500] < 20) {
+        console.log("La máquina no tiene suficiente dinero para iniciar el día. Por favor, recargue la máquina.");
+        maquinaEncendida = false;
+    }
 }
-if (RECETAS< stockMinimo) {
-    console.log("No hay suficiente stock para preparar esta bebida.");
+//funcion para elección de bebida
+let menu= parseInt(prompt("Hola. Por favor, seleccione una bebida: \n1. Tinto \n2. Café con leche \n3. Capuchino \n4. Mocaccino \n5. Té"));
+let precioBebida;
+let saldoBebida;
+
+function comprarBebida(precioBebida) {
+    console.log(`El precio de la bebida es: ${precioBebida} pesos.`);
+    saldoBebida = Number(prompt("Ingrese el dinero para pagar la bebida:"));
+    let mensaje = "";
+    if (saldoBebida < precioBebida) {
+        mensaje = alert("Saldo insuficiente. Por favor, ingrese más dinero.");
+    } else {
+        mensaje = alert("Gracias por su compra. Aquí está su bebida.");
+    }
+    return mensaje;
 }
-     if (RECETAS > stockMinimo){
-        console.log("Selecciona la bebida que deseas preparar.");
-     }
+
+
+
+    switch (menu) {
+        case 1:}
