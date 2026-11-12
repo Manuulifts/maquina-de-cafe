@@ -1,15 +1,8 @@
-//Maquinita de café//
 
-// bebidas disponibles
-const productos = ["tinto", "cafe", "capuchino", "mocaccino", "te", "chocolate"];
 
 //Precio de cada café
-const precioTinto = 2000;
-const precioCafe = 2500;
-const precioCapuchino = 3500;
-const precioMocaccino = 4000;
-const precioChocolate = 3500;
-const precioTe = 2500;
+
+const precioBebidas = {precioTinto: 2000, precioCafe: 2500, precioCapuchino: 3500, precioMocaccino: 4000, precioChocolate: 3500, precioTe: 2500};
 let ingredienteslleno = false; //Variable para indicar si los ingredientes están llenos
 let dinerolleno = false; //Variable para indicar si el dinero está lleno
 
@@ -25,6 +18,7 @@ function menuPrincipal() {
 
     switch (usuario){
         case "1":
+        menuCliente();
         break;
         case "2": 
         menuDistribuidor();
@@ -102,8 +96,6 @@ function rellenarDinero() {
     menuDistribuidor();
     }
 
-
-//preparación de cada receta por vaso en gramos
 const recetas = {
     tinto: { cafe: 3, leche: 0, choco: 0, te: 0, agua: 150},
     cafe: { cafe: 3, leche: 10, choco: 0, te: 0, agua: 150},
@@ -114,40 +106,47 @@ const recetas = {
 };
 
 
-// Dinero que acepta la máquina
+function menuCliente(){
+    let eleccion= prompt ("Hola. \nPor favor, seleccione una bebida: \n1. Tinto.............. $2.000\n2. Café con leche..... $2.500\n3. Capuchino.......... $3.500\n4. Mocaccino.......... $4.000\n5. Té................. $2.500\n6. Chocolate.......... $3.000\n7. Salir");
+    switch (eleccion) {
+        case "1":
+            comprarBebida(precioBebidas.precioTinto);
+            break;
+        case "2":
+            comprarBebida(precioBebidas.precioCafe);
+            break;
+        case "3":
+            comprarBebida(precioBebidas.precioCapuchino);
+            break;
+        case "4":
+            comprarBebida(precioBebidas.precioMocaccino);
+            break;
+        case "5":
+            comprarBebida(precioBebidas.precioTe);
+            break; 
+        case "6":
+            comprarBebida(precioBebidas.precioChocolate);
+            break;
+        case "7":
+            alert("Gracias por su visita. ¡Hasta luego!");
+            break; 
+        default:
+            alert("Opción no válida. Por favor, seleccione una bebida del 1 al 7.");
+            menuCliente();
+            break;
+}
+}
+
+function comprarBebida(precio) {
+    let dineroIngresado = Number(prompt("Ingrese el dinero para pagar la bebida:"));
+    while (dineroIngresado < precio) {
+        alert("Dinero insuficiente. Le faltan $" + (precio - dineroIngresado));
+        dineroIngresado = dineroIngresado + Number(prompt("Ingrese más dinero:"));
+    }
+    alert("Gracias por su compra. Aquí está su bebida.");
+}
+
 const monedas = [100, 200, 500,1000];
 const billetes = [2000, 5000, 10000, 20000];
 const stockBilletes = 80000;                       //dinero en la máquina Billetes para la devuelta 2000, 5000, 10000.
-const stockMonedas = 20000;                    //dinero en la máquina Monedas para la devuelta 100, 200, 500.
-
-
-//Stock de dinero en la máquina
-
-let saldoDinero = 0; //Saldo de dinero ingresado por el usuario
-let ventasTotales = 0; //Ventas totales de la máquina
-let maquinaEncendida = true; //Estado de la máquina (encendida o apagada)
-
-
-
-
-//funcion para elección de bebida
-/*let menu= parseInt(prompt("Hola. Por favor, seleccione una bebida: \n1. Tinto \n2. Café con leche \n3. Capuchino \n4. Mocaccino \n5. Té"));
-let precioBebida;
-let saldoBebida;*/
-
-function comprarBebida(precioBebida) {
-    console.log(`El precio de la bebida es: ${precioBebida} pesos.`);
-    saldoBebida = Number(prompt("Ingrese el dinero para pagar la bebida:"));
-    let mensaje = "";
-    if (saldoBebida < precioBebida) {
-        mensaje = alert("Saldo insuficiente. Por favor, ingrese más dinero.");
-    } else {
-        mensaje = alert("Gracias por su compra. Aquí está su bebida.");
-    }
-    return mensaje;
-}
-
-
-
-    switch (menu) {
-        case 1:}
+const stockMonedas = 20000;   
