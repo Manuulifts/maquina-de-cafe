@@ -1,34 +1,34 @@
 # Máquina expendedora de café
 
 ## Entradas
-### Del usuario
+### Del cliente
 
 
 | Entrada | Valores posibles |
 | :--- |  ---: |
 | Billete | 2000, 5000, 10000, 20000| 
 | Moneda | 100, 200, 500, 1000| 
-| Bebida elegida | Tinto, Cafe con leche, capuchino, té, mocaccino | 
+| Bebida elegida | Tinto, cafe con leche, capuchino, té, mocaccino, chocolate | 
 | Azúcar| de 0 a 10 gr| 
 | Cancelar| si/no| 
 
-### Del operador
+### Del distribuidor
 |Entrada | Descripción  |
 | :--- | ---: |
-| Recarga de insumos | café instantaneo, Leche en polvo, azúcar, chocolate en polvo, Té| 
-| Recarga de vasos | Cantidad vasos Máximo 80 unidades| 
+| Recarga de insumos | Café instantaneo, leche en polvo, azúcar, chocolate en polvo, té| 
+| Recarga de vasos | Cantidad vasos Máximo 200 unidades 6oz| 
 | Recarga de billetes | Billetes para la devuelta 2000, 5000, 10000. Tener mínimo $ 80000 al inicio del día en billetes surtidos | 
 | Recarga de monedas| Monedas para la devuelta 100, 200, 500, 1000 Tener mínimo $ 20000 al incio del día en monedas surtidas| 
 
 ## Proceso
 ### Pasos
-1 Recibir el dinero y sumar el saldo
-2 Esperar que el usuario escoja bebida y azúcar
-3 Revisar las reglas del negocio
-4 Si todo esta bien se sirve la bebida
-5 Descontar ingredientes y vasos del stock
-6 Calcular y entregar laa vueltas
-7 Dejar el saldo en 0
+1. Recibir el dinero y sumar el saldo 
+2. Esperar que el usuario escoja bebida y azúcar
+3. Revisar las reglas del negocio
+4. Si todo esta bien se sirve la bebida
+5. Descontar ingredientes y vasos del stock
+6. Calcular y entregar las vueltas
+7. Dejar el saldo en $0
 
 ## Reglas del negocio
 
