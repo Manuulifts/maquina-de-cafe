@@ -1,5 +1,3 @@
-
-
 //Precio de cada café
 
 const precioBebidas = {precioTinto: 2000, precioCafe: 2500, precioCapuchino: 3500, precioMocaccino: 4000, precioChocolate: 3500, precioTe: 2500};
@@ -28,7 +26,7 @@ function menuPrincipal() {
         break;
 }
     }
-menuPrincipal();
+
 function menuDistribuidor() {
     if (ingredienteslleno==true&&dinerolleno==true){ 
         alert("Todo está rellenado. Volviendo al menú principal.");
@@ -105,7 +103,24 @@ const recetas = {
     chocolate: { cafe: 0, leche: 6, choco: 22, te: 0, agua: 150}
 };
 
-
+const nivelAzucar = () => {
+    const niveles = ["Sin azúcar", "Poca azúcar", "Normal", "Doble azúcar"];
+    let eleccionAzucar = prompt("Seleccione el nivel de azúcar:\n1. Sin azúcar 0 gr\n2. Poca azúcar 1-3 gr \n3. Normal 4-6 gr\n4. Doble azúcar 7-10 gr");
+    switch (eleccionAzucar) {
+        case "1":
+            return niveles[0];
+        case "2":
+            return niveles[1];
+        case "3":
+            return niveles[2];
+        case "4":
+            return niveles[3];
+        default:
+            alert("Opción no válida. Por favor, seleccione un nivel de azúcar del 1 al 4.");
+            return nivelAzucar();
+            
+    }  
+}
 function menuCliente(){
     let eleccion= prompt ("Hola. \nPor favor, seleccione una bebida: \n1. Tinto.............. $2.000\n2. Café con leche..... $2.500\n3. Capuchino.......... $3.500\n4. Mocaccino.......... $4.000\n5. Té................. $2.500\n6. Chocolate.......... $3.000\n7. Salir");
     switch (eleccion) {
@@ -138,42 +153,30 @@ function menuCliente(){
 }
 
 function comprarBebida(precio) {
+    let azucarElegida = nivelAzucar();
     let dineroIngresado = Number(prompt("Ingrese el dinero para pagar la bebida:"));
     while (dineroIngresado < precio) {
         alert("Dinero insuficiente. Le faltan $" + (precio - dineroIngresado));
-        dineroIngresado = dineroIngresado + Number(prompt("Ingrese más dinero:"));
-        ;
+        dineroIngresado += Number(prompt("Ingrese más dinero:"));
     }
-    
-    while (dineroIngresado > precio) {
-        let cambio = dineroIngresado - precio;
-        alert("Su cambio es de $" + cambio);
-        dineroIngresado = precio; 
-    }  
-    
-const nivelAzucar = () => {
-    const niveles = ["Sin azúcar", "Poca azúcar", "Normal", "Doble azúcar"];
-    let eleccionAzucar = prompt("Seleccione el nivel de azúcar:\n1. Sin azúcar 0 gr\n2. Poca azúcar 1-3 gr \n3. Normal 4-6 gr\n4. Doble azúcar 7-10 gr");
-    switch (eleccionAzucar) {
-        case "1":
-            return niveles[0];
-        case "2":
-            return niveles[1];
-        case "3":
-            return niveles[2];
-        case "4":
-            return niveles[3];
-        default:
-            alert("Opción no válida. Por favor, seleccione un nivel de azúcar del 1 al 4.");
-            return nivelAzucar();
-            
+    const valores = [20000, 10000, 5000, 2000, 1000, 500, 200, 100];
+    let cambio = dineroIngresado - precio;
+    if (cambio > 0) {
+        alert("Vueltas:");
+        for (let i = 0; i < valores.length; i++) {
+            if (cambio >= valores[i]) {
+                let cantidad = Math.floor(cambio / valores[i]);
+                cambio = cambio % valores[i];
+                let tipo = (valores[i] >= 2000) ? "billete(s)" : "moneda(s)";
+                alert(" - " + cantidad + " " + tipo + " de $" + valores[i]);
+            }
+        }
+    } else {
+        alert("No hay vueltas. Pago exacto.");
     }
-        
+    alert("Gracias por su compra.\n" +
+          "Nivel de azúcar: " + azucarElegida +
+          "\nAquí está su bebida.");
+    menuPrincipal();
 }
-let azucarSeleccionada = nivelAzucar();
-     alert("Gracias por su compra. Aquí está su bebida.");
-}
-const monedas = [100, 200, 500,1000];
-const billetes = [2000, 5000, 10000, 20000];
-const stockBilletes = 80000;                       
-const stockMonedas = 20000;   
+menuPrincipal();
