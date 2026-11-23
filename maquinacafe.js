@@ -128,28 +128,28 @@ function menuCliente(){
 function elegirBebida(dineroIngresado,eleccion){
     switch (eleccion) {
         case "1":
-            comprarBebida(precioBebidas.precioTinto,dineroIngresado);
+            comprarBebida(precioBebidas.precioTinto,dineroIngresado, "Tinto");
             break;
         case "2":
-            comprarBebida(precioBebidas.precioCafe,dineroIngresado);
+            comprarBebida(precioBebidas.precioCafe,dineroIngresado, "Café");
             break;
         case "3":
-            comprarBebida(precioBebidas.precioCapuchino,dineroIngresado);
+            comprarBebida(precioBebidas.precioCapuchino,dineroIngresado, "Capuchino");
             break;
         case "4":
-            comprarBebida(precioBebidas.precioMocaccino,dineroIngresado);
+            comprarBebida(precioBebidas.precioMocaccino,dineroIngresado, "Mocacino");
             break;
         case "5":
-            comprarBebida(precioBebidas.precioTe,dineroIngresado);
+            comprarBebida(precioBebidas.precioTe,dineroIngresado, "Té");
             break; 
         case "6":
-            comprarBebida(precioBebidas.precioChocolate,dineroIngresado);
+            comprarBebida(precioBebidas.precioChocolate,dineroIngresado, "Chocolate");
             break;
     }
 }
 
 
-function comprarBebida(precio, dineroIngresado) {
+function comprarBebida(precio, dineroIngresado, nombreBebida) {
 
     if (dineroIngresado < precio) {
         mostrarMensaje("Saldo insuficiente. Te faltan $" + (precio - dineroIngresado));
@@ -178,8 +178,11 @@ function comprarBebida(precio, dineroIngresado) {
     document.getElementById("bill-output").textContent = billetes || "Sin billetes";
     document.getElementById("coin-output").textContent = monedas || "Sin monedas";
 
+    
+
     saldo = 0;
     document.getElementById("credit").textContent = "$0";
+    document.getElementById("dispenser").textContent = nombreBebida;
 
     mostrarMensaje("¡Compra exitosa!\n Azúcar: " + azucarElegida + " g. \nDisfruta tu bebida!");
 }
@@ -219,7 +222,7 @@ document.querySelectorAll("[data-select]").forEach(function(button) {
     });
 });
 
-document.getElementById("mensaje-maquina").textContent = "¡Máquina lista!";
+document.getElementById("mensaje-maquina").textContent = "";
 
 function mostrarMensaje(mensaje) {
     document.getElementById("mensaje-maquina").textContent = mensaje;
