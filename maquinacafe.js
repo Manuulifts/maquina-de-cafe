@@ -12,12 +12,11 @@ let stockDinero = { $2000: 1, $5000: 4, $10000: 2, $100: 10, $200: 0, $500: 20};
 
 function fueraDeServicio() {
     if (stock.cafe < stockMin.cafe || stock.leche < stockMin.leche || stock.choco < stockMin.choco || stock.te < stockMin.te || stock.vasos < stockMin.vasos || stock.azu < stockMin.azu) {
-        alert("No hay ingredientes o di suficientes. La máquina está fuera de servicio. ");
+        alert("No hay ingredientes o dinero suficientes. La máquina está fuera de servicio. ");
         return true;
     }
     return false;
 }
-
 function menuPrincipal() {
     let usuario = prompt ("1. Cliente \n 2. Distribuidor");
 
@@ -32,8 +31,7 @@ function menuPrincipal() {
         alert("Opción no válida.");
         break;
     }
-        }
-
+}
 function menuDistribuidor() {
     if (ingredienteslleno==true&&dinerolleno==true){ 
         alert("Todo está rellenado. Volviendo al menú principal.");
@@ -77,7 +75,7 @@ function menuDistribuidor() {
             break;
             }
     
-        }
+}
 function rellenarIngredientes() {
     stock.cafe = 500;
     stock.leche = 3000;
@@ -88,7 +86,7 @@ function rellenarIngredientes() {
     ingredienteslleno = true;
     alert("Ingredientes rellenados correctamente. \n"+"Café: " + stock.cafe + "\n" +"Leche: " + stock.leche + "\n" +"Chocolate: " + stock.choco + "\n" +"Té: " + stock.te + "\n" +"Vasos: " + stock.vasos + "\n" +"Azúcar: " + stock.azu);
     menuDistribuidor();       
-    }
+}
 function rellenarDinero() {
     stockDinero.$2000 = 15;
     stockDinero.$5000 = 4;
@@ -99,7 +97,7 @@ function rellenarDinero() {
     dinerolleno = true;
     alert("Dinero rellenado correctamente. \n"+"Billetes:\n"+"$2000: " + stockDinero.$2000 + "\n" + "$5000: " + stockDinero.$5000 + "\n" +"$10000: " + stockDinero.$10000 + "\n\n" +"Monedas:\n"+"$100: " + stockDinero.$100 + "\n" +"$200: " + stockDinero.$200 + "\n" +"$500: " + stockDinero.$500 + "\n");
     menuDistribuidor();
-    }
+}
 
 const recetas = {
     tinto: { cafe: 3, leche: 0, choco: 0, te: 0, agua: 150},
@@ -110,23 +108,13 @@ const recetas = {
     chocolate: { cafe: 0, leche: 6, choco: 22, te: 0, agua: 150}
     }
 
-const nivelAzucar = () => {
-    const niveles = ["Sin azúcar", "Poca azúcar", "Normal", "Doble azúcar"];
-    let eleccionAzucar = prompt("Seleccione el nivel de azúcar:\n1. Sin azúcar 0 gr\n2. Poca azúcar 1-3 gr \n3. Normal 4-6 gr\n4. Doble azúcar 7-10 gr");
-    switch (eleccionAzucar) {
-        case "1":
-            return niveles[0];
-        case "2":
-            return niveles[1];
-        case "3":
-            return niveles[2];
-        case "4":
-            return niveles[3];
-        default:
-            alert("Opción no válida. Por favor, seleccione un nivel de azúcar del 1 al 4.");
-            return nivelAzucar();
-            
-    }  
+const Azucar = () => {
+    let eleccionAzucar = prompt("Seleccione la cantidad de azúcar que desea:")
+    let azucar = Number(eleccionAzucar);
+    while (azucar < 0 || azucar > 10 || !Number.isInteger(azucar)){
+        eleccionAzucar = prompt("Cantidad no válida. Por favor, seleccione una cantidad de 0 a 10:");
+    }
+    return eleccionAzucar;
     }
 
 function menuCliente(){
