@@ -10,6 +10,45 @@ let stock = { cafe: 3, leche: 3000, choco: 3600, te: 12, vasos: 10, azu:10 };
 const DineroMin = { "$2000": 15, "$5000": 4, "$10000": 3, "$100": 10, "$200": 20, "$500": 20};
 let stockDinero = { $2000: 1, $5000: 4, $10000: 2, $100: 10, $200: 0, $500: 20};
 
+function actualizarInventario() {
+    const equivalencias = {
+        coffee: stock.cafe,
+        milk: stock.leche,
+        sugar: stock.azu,
+        chocolate: stock.choco,
+        tea: stock.te,
+        cups: stock.vasos,
+        b10000: stockDinero[10000],
+        b5000: stockDinero[5000],
+        b2000: stockDinero[2000],
+        c500: stockDinero[500],
+        c200: stockDinero[200],
+        c100: stockDinero[100]
+    };
+
+    document.querySelectorAll("#admin-rows tr").forEach(fila => {
+        let clave = fila.getAttribute("data-key");
+        fila.querySelector("[data-cur]").textContent = equivalencias[clave];
+    });
+}
+
+actualizarInventario();
+
+document.getElementById("admin-login").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let pin = document.getElementById("admin-pin").value;
+
+    if (pin === "0000") {
+        document.getElementById("admin-panel").hidden = false;
+        document.getElementById("admin-login").hidden = true;
+        document.getElementById("admin-msg").textContent = "Acceso autorizado";
+        actualizarInventario();
+    } else {
+        document.getElementById("admin-alert").textContent = "PIN incorrecto";
+    }
+});
+
 function fueraDeServicio() {
     if (stock.cafe < stockMin.cafe || stock.leche < stockMin.leche || stock.choco < stockMin.choco || stock.te < stockMin.te || stock.vasos < stockMin.vasos || stock.azu < stockMin.azu) {
         alert("No hay ingredientes o dinero suficientes. La máquina está fuera de servicio. ");
@@ -149,69 +188,56 @@ function elegirBebida(dineroIngresado,eleccion){
 }
 
 
+
 function comprarBebida(precio, dineroIngresado, nombreBebida) {
+
     if (fueraDeServicio()) {
-    return;
-}
+        return;
+    }
+
     if (dineroIngresado < precio) {
         mostrarMensaje("Saldo insuficiente. Te faltan $" + (precio - dineroIngresado));
         return;
     }
 
-    let cambio = dineroIngresado - precio;
-    const valores = [20000, 10000, 5000, 2000, 1000, 500, 200, 100];
+    const nombres = {
+        "Tinto": "tinto",
+        "Café": "cafe",
+        "Capuchino": "capuchino",
+        "Mocacino": "mocaccino",
+        "Té": "te",
+        "Chocolate": "chocolate"
+    };
 
-    let billetes = "";
-    let monedas = "";
+    let receta = recetas[nombres[nombreBebida]];
 
-    for (let i = 0; i < valores.length; i++) {
-        if (cambio >= valores[i]) {
-            let cantidad = Math.floor(cambio / valores[i]);
-            cambio = cambio % valores[i];
-
-            if (valores[i] >= 2000) {
-                billetes += cantidad + " x $" + valores[i] + " ";
-            } else {
-                monedas += cantidad + " x $" + valores[i] + " ";
-            }
+    // Comprobar ingredientes
+    for (let ingrediente in receta) {
+        if (ingrediente !== "agua" && stock[ingrediente] < receta[ingrediente]) {
+            mostrarMensaje("Inventario insuficiente");
+            return;
         }
     }
 
-    document.getElementById("bill-output").textContent = billetes || "Sin billetes";
-    document.getElementById("coin-output").textContent = monedas || "Sin monedas";
-
+    // Descontar ingredientes
     for (let ingrediente in receta) {
-    if (ingrediente !== "agua") {
-        stock[ingrediente] -= receta[ingrediente];
+        if (ingrediente !== "agua") {
+            stock[ingrediente] -= receta[ingrediente];
+        }
     }
-}
 
-stock.vasos--;
-stock.azu -= azucarElegida;
+    stock.vasos--;
+    stock.azu -= azucarElegida;
 
     saldo = 0;
     document.getElementById("credit").textContent = "$0";
-    const nombres = {
-    "Tinto": "tinto",
-    "Café": "cafe",
-    "Capuchino": "capuchino",
-    "Mocacino": "mocaccino",
-    "Té": "te",
-    "Chocolate": "chocolate"
-};
-
-let receta = recetas[nombres[nombreBebida]];
-
-for (let ingrediente in receta) {
-    if (ingrediente !== "agua" && stock[ingrediente] < receta[ingrediente]) {
-        mostrarMensaje("Inventario insuficiente");
-        return;
-    }
-}
     document.getElementById("dispenser").textContent = nombreBebida;
 
-    mostrarMensaje("¡Compra exitosa!\n Azúcar: " + azucarElegida + " g. \nDisfruta tu bebida!");
+    actualizarInventario();
+
+    mostrarMensaje("¡Compra exitosa! Disfruta tu bebida!");
 }
+
 
 function cancelarCompra() {
     let dineroDevuelto = saldo;
