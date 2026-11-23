@@ -185,4 +185,17 @@ function comprarBebida(precio, dineroIngresado) {
 }
 
 
+let saldo = 0;
 
+document.getElementById("balance-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let dinero = Number(document.getElementById("balance-input").value);
+
+    if (dinero > 0) {
+        saldo += dinero;
+        document.getElementById("credit").textContent = "$" + saldo;
+
+        document.getElementById("balance-input").value = "";
+    }
+});
