@@ -11,12 +11,12 @@
 | Cancelar| Si/No| 
 
 ### Del distribuidor
-|Entrada | Descripción  |
-| :--- | ---: |
-| Recarga de insumos | Café, leche, azúcar, chocolate en polvo, té| 
-| Recarga de vasos | Cantidad máxima de vasos 200 unidades de 6oz| 
-| Recarga de billetes | Billetes de $2.000, $5.000 y $10.000.| 
-| Recarga de monedas| Monedas de $100, $200 y $500| 
+| Opción | Descripción |
+| :--- | :--- |
+| Entrar | Acceso al panel mediante el PIN `0000`. |
+| Actual | Visualización de las cantidades disponibles del inventario. |
+| Llenar todo al máximo | Restablece el inventario a sus capacidades máximas. |
+| Salir | Cierra el panel de distribuidor. | 
 
 ## Precios
 | Bebida | Precio |
