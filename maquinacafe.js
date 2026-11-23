@@ -125,7 +125,7 @@ function menuCliente(){
     elegirBebida(dineroIngresado);
 }
 
-function elegirBebida(dineroIngresado){
+function elegirBebida(dineroIngresado,eleccion){
     switch (eleccion) {
         case "1":
             comprarBebida(precioBebidas.precioTinto,dineroIngresado);
@@ -145,44 +145,23 @@ function elegirBebida(dineroIngresado){
         case "6":
             comprarBebida(precioBebidas.precioChocolate,dineroIngresado);
             break;
-        case "7":
-            alert("Gracias por su visita. ¡Hasta luego!");
-            break; 
-        default:
-            alert("Opción no válida. Por favor, seleccione una bebida del 1 al 7.");
-            elegirBebida(dineroIngresado);
-            break;
     }
 }
 
 
 function comprarBebida(precio, dineroIngresado) {
-    while (dineroIngresado < precio) {
-        alert("Dinero insuficiente. Le faltan $" + (precio - dineroIngresado));
-        dineroIngresado += Number(prompt("Ingrese más dinero:"));
+
+    if (dineroIngresado < precio) {
+        mostrarMensaje("Saldo insuficiente. Te faltan $" + (precio - dineroIngresado));
+        return;
     }
-    let azucarElegida = Azucar();
-    const valores = [20000, 10000, 5000, 2000, 1000, 500, 200, 100];
-    let cambio = dineroIngresado - precio;
-    if (cambio > 0) {
-        alert("Vueltas:");
-        for (let i = 0; i < valores.length; i++) {
-            if (cambio >= valores[i]) {
-                let cantidad = Math.floor(cambio / valores[i]);
-                cambio = cambio % valores[i];
-                let tipo = (valores[i] >= 2000) ? "billete(s)" : "moneda(s)";
-                alert(" - " + cantidad + " " + tipo + " de $" + valores[i]);
-            }
-        }
-    } else {
-        alert("No hay vueltas. Pago exacto.");
-    }
-    alert("Gracias por su compra.\n" +
-          "Nivel de azúcar: " + azucarElegida +
-          "\nAquí está su bebida.");
-    menuPrincipal();
+
+    saldo = dineroIngresado - precio;
+
+    document.getElementById("credit").textContent = "$" + saldo;
+
+    mostrarMensaje("¡Compra exitosa! Disfruta tu bebida. Azúcar: " + azucarElegida + " g");
 }
-menuPrincipal();
 
 let saldo = 0;
 
@@ -210,3 +189,16 @@ document.querySelectorAll("[data-sugar]").forEach(function(button) {
         }
     });
 });
+
+document.querySelectorAll("[data-select]").forEach(function(button) {
+    button.addEventListener("click", function() {
+        let bebida = button.getAttribute("data-select");
+        elegirBebida(saldo, bebida);
+    });
+});
+
+document.getElementById("mensaje-maquina").textContent = "¡Máquina lista!";
+
+function mostrarMensaje(mensaje) {
+    document.getElementById("mensaje-maquina").textContent = mensaje;
+}
