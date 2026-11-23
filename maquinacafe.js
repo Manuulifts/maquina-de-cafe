@@ -144,8 +144,27 @@ function actualizarInventario() {
         let clave = fila.getAttribute("data-key");
         fila.querySelector("[data-cur]").textContent = equivalencias[clave];
     });
-}
 
+    actualizarEstadoProductos();
+}
+function actualizarEstadoProductos() {
+
+    let ingredientesAgotados = Object.values(stock).some(cantidad => cantidad <= 0);
+
+    let dineroAgotado = Object.values(stockDinero).some(cantidad => cantidad <= 0);
+
+    let agotado = ingredientesAgotados || dineroAgotado;
+
+    document.querySelectorAll(".estado-producto").forEach(elemento => {
+        elemento.textContent = agotado ? "Agotado" : "Disponible";
+    });
+
+    if (agotado) {
+        document.getElementById("mensaje-maquina").textContent = "FUERA DE SERVICIO";
+    } else {
+        document.getElementById("mensaje-maquina").textContent = "Seleccione una bebida";
+    }
+}
 actualizarInventario();
 
 document.getElementById("admin-login").addEventListener("submit", function(event) {
