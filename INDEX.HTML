@@ -26,6 +26,7 @@
               <span class="shelf__code">1</span>
               <span class="shelf__name">Tinto</span>
               <span class="shelf__price">$2000</span>
+              <span class="shelf__stock">Stock: <b>123</b></span>
             </div>
           </div>
 
@@ -35,6 +36,7 @@
               <span class="shelf__code">2</span>
               <span class="shelf__name">Café</span>
               <span class="shelf__price">$2500</span>
+              <span class="shelf__stock">Stock: <b>123</b></span>
             </div>
           </div>
 
@@ -119,6 +121,15 @@
             <button class="balance-form__submit" type="submit">Abonar</button>
           </div>
         </form>
+
+        <div class="sugar"></div>
+        <span class="sugar__label">Azúcar (máx. 10 g)</span>
+          <div class="sugar__row">
+            <button class="sugar__btn" type="button" data-sugar="-1" aria-label="Menos azúcar">−</button>
+            <span class="sugar__value"><b id="sugar-value">0</b> g</span>
+            <button class="sugar__btn" type="button" data-sugar="1" aria-label="Más azúcar">+</button>
+          </div>
+        </div>
 
         <div class="keypad">
           <button class="key" type="button" data-select="1">1</button>
