@@ -224,6 +224,16 @@ document.querySelectorAll("[data-select]").forEach(function(button) {
 
 document.getElementById("mensaje-maquina").textContent = "";
 
+let temporizadorMensaje;
+
 function mostrarMensaje(mensaje) {
-    document.getElementById("mensaje-maquina").textContent = mensaje;
+    let pantalla = document.getElementById("mensaje-maquina");
+
+    clearTimeout(temporizadorMensaje);
+
+    pantalla.textContent = mensaje;
+
+    temporizadorMensaje = setTimeout(function() {
+        pantalla.textContent = "";
+    }, 2000);
 }
