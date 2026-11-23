@@ -150,7 +150,9 @@ function elegirBebida(dineroIngresado,eleccion){
 
 
 function comprarBebida(precio, dineroIngresado, nombreBebida) {
-
+    if (fueraDeServicio()) {
+    return;
+}
     if (dineroIngresado < precio) {
         mostrarMensaje("Saldo insuficiente. Te faltan $" + (precio - dineroIngresado));
         return;
@@ -178,10 +180,34 @@ function comprarBebida(precio, dineroIngresado, nombreBebida) {
     document.getElementById("bill-output").textContent = billetes || "Sin billetes";
     document.getElementById("coin-output").textContent = monedas || "Sin monedas";
 
-    
+    for (let ingrediente in receta) {
+    if (ingrediente !== "agua") {
+        stock[ingrediente] -= receta[ingrediente];
+    }
+}
+
+stock.vasos--;
+stock.azu -= azucarElegida;
 
     saldo = 0;
     document.getElementById("credit").textContent = "$0";
+    const nombres = {
+    "Tinto": "tinto",
+    "Café": "cafe",
+    "Capuchino": "capuchino",
+    "Mocacino": "mocaccino",
+    "Té": "te",
+    "Chocolate": "chocolate"
+};
+
+let receta = recetas[nombres[nombreBebida]];
+
+for (let ingrediente in receta) {
+    if (ingrediente !== "agua" && stock[ingrediente] < receta[ingrediente]) {
+        mostrarMensaje("Inventario insuficiente");
+        return;
+    }
+}
     document.getElementById("dispenser").textContent = nombreBebida;
 
     mostrarMensaje("¡Compra exitosa!\n Azúcar: " + azucarElegida + " g. \nDisfruta tu bebida!");
