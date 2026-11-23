@@ -111,9 +111,9 @@ const recetas = {
 const Azucar = () => {
     let azucar = Number(prompt("Seleccione la cantidad de azúcar que desea:"));
     while (azucar < 0 || azucar > 10 || !Number.isInteger(azucar)){
-        azucar = Number(prompt("Cantidad no válida. Por favor, seleccione una cantidad de 0 a 10:"));
+        azu = prompt("Cantidad no válida. Por favor, seleccione una cantidad de 0 a 10:");
     }
-    return azucar;
+    return eleccionAzucar;
     }
 
 function menuCliente(){
@@ -126,7 +126,6 @@ function menuCliente(){
 }
 
 function elegirBebida(dineroIngresado){
-    let eleccion = prompt("Saldo: $" + dineroIngresado + "\nPor favor, seleccione una bebida: \n1. Tinto.............. $2.000\n2. Café con leche..... $2.500\n3. Capuchino.......... $3.500\n4. Mocaccino.......... $4.000\n5. Té................. $2.500\n6. Chocolate.......... $3.000\n7. Salir");
     switch (eleccion) {
         case "1":
             comprarBebida(precioBebidas.precioTinto,dineroIngresado);
@@ -183,7 +182,7 @@ function comprarBebida(precio, dineroIngresado) {
           "\nAquí está su bebida.");
     menuPrincipal();
 }
-
+menuPrincipal();
 
 let saldo = 0;
 
@@ -200,10 +199,14 @@ document.getElementById("balance-form").addEventListener("submit", function(even
     }
 });
 
-document.querySelectorAll("[data-select]").forEach(function(button) {
-    button.addEventListener("click", function() {
-        let bebida = button.getAttribute("data-select");
+let azucarElegida=0;
 
-        elegirBebida(saldo, bebida);
+document.querySelectorAll("[data-sugar]").forEach(function(button) {
+    button.addEventListener("click", function() {
+        let cantidad = Number(button.getAttribute("data-sugar"));
+        if (azucarElegida + cantidad >= 0 && azucarElegida + cantidad <= 10) {
+            azucarElegida += cantidad;
+            document.getElementById("sugar-value").textContent = azucarElegida;
+        }
     });
 });
