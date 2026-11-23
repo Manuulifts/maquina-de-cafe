@@ -382,6 +382,9 @@ function comprarBebida(precio, dineroIngresado, nombreBebida) {
     saldo = 0;
     document.getElementById("credit").textContent = "$0";
     document.getElementById("dispenser").textContent = nombreBebida;
+    setTimeout(() => {
+    document.getElementById("dispenser").textContent = "";
+}, 5000);
 
     actualizarInventario();
 
