@@ -473,6 +473,8 @@ function llenarAlMaximo() {
 
     stock = { ...stockRellenado };
 
+    stockDinero = { ...DineroMin };
+
     actualizarInventario();
 
     document.getElementById("admin-msg").textContent =
