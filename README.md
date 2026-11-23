@@ -39,16 +39,6 @@
 | Chocolate | 0 | 6 | 22 | 0 | 180 |
 **Nota:** Los vasos tienen una capacidad de 8 oz, pero cada bebida se sirve con 6 oz de agua. El agua no se descuenta del inventario. La cantidad de azúcar depende de la selección del cliente.
 
-## Capacidad del inventario
-| Insumo | Cantidad máxima |
-| :--- | ---: |
-| Café | 500 g |
-| Leche | 3000 g |
-| Chocolate | 3600 g |
-| Té | 2400 g |
-| Azúcar | 2000 g |
-| Vasos | 200 unidades |
-| Agua | Ilimitada|
 
 ## Proceso
 ### Pasos
