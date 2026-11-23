@@ -381,7 +381,8 @@ function comprarBebida(precio, dineroIngresado, nombreBebida) {
 
     saldo = 0;
     document.getElementById("credit").textContent = "$0";
-    document.getElementById("dispenser").textContent = nombreBebida;
+    document.getElementById("dispenser").textContent =
+    nombreBebida + " - Azúcar: " + azucarElegida;
     setTimeout(() => {
     document.getElementById("dispenser").textContent = "";
 }, 5000);
