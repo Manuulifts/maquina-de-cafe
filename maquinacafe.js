@@ -187,6 +187,24 @@ function comprarBebida(precio, dineroIngresado, nombreBebida) {
     mostrarMensaje("¡Compra exitosa!\n Azúcar: " + azucarElegida + " g. \nDisfruta tu bebida!");
 }
 
+function cancelarCompra() {
+    let dineroDevuelto = saldo;
+
+    saldo = 0;
+    document.getElementById("credit").textContent = "$0";
+
+    document.getElementById("balance-input").value = "";
+
+    document.getElementById("bill-output").textContent =
+        dineroDevuelto > 0 ? "Devolución: $" + dineroDevuelto : "";
+
+    document.getElementById("coin-output").textContent = "";
+
+    azucarElegida = 0;
+    document.getElementById("sugar-value").textContent = "0";
+
+    mostrarMensaje("Saldo devuelto: $" + dineroDevuelto);
+}
 
 let saldo = 0;
 
@@ -223,6 +241,7 @@ document.querySelectorAll("[data-select]").forEach(function(button) {
 });
 
 document.getElementById("mensaje-maquina").textContent = "";
+document.querySelector('[data-action="cancel"]').onclick = cancelarCompra;
 
 let temporizadorMensaje;
 
@@ -237,3 +256,4 @@ function mostrarMensaje(mensaje) {
         pantalla.textContent = "";
     }, 2000);
 }
+
