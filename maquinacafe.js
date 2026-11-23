@@ -22,7 +22,24 @@ function descomponerDinero(cantidad) {
 
     return cantidad === 0 ? resultado : null;
 }
+function cancelarCompra() {
 
+    let dineroDevuelto = saldo;
+
+    if (!devolverDinero(dineroDevuelto)) {
+        return;
+    }
+
+    saldo = 0;
+
+    document.getElementById("credit").textContent = "$0";
+    document.getElementById("balance-input").value = "";
+
+    azucarElegida = 0;
+    document.getElementById("sugar-value").textContent = "0";
+
+    mostrarMensaje("Saldo devuelto: $" + dineroDevuelto);
+}
 function actualizarInventario() {
     const equivalencias = {
         coffee: stock.cafe,
@@ -232,6 +249,13 @@ function comprarBebida(precio, dineroIngresado, nombreBebida) {
         }
     }
 
+    // Calcular y entregar las vueltas
+    let cambio = dineroIngresado - precio;
+
+    if (!devolverDinero(cambio)) {
+    return;
+    }
+
     // Descontar ingredientes
     for (let ingrediente in receta) {
         if (ingrediente !== "agua") {
@@ -253,17 +277,17 @@ function comprarBebida(precio, dineroIngresado, nombreBebida) {
 
 
 function cancelarCompra() {
+
     let dineroDevuelto = saldo;
 
+    if (!devolverDinero(dineroDevuelto)) {
+        return;
+    }
+
     saldo = 0;
+
     document.getElementById("credit").textContent = "$0";
-
     document.getElementById("balance-input").value = "";
-
-    document.getElementById("bill-output").textContent =
-        dineroDevuelto > 0 ? "Devolución: $" + dineroDevuelto : "";
-
-    document.getElementById("coin-output").textContent = "";
 
     azucarElegida = 0;
     document.getElementById("sugar-value").textContent = "0";
