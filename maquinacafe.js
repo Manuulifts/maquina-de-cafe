@@ -22,6 +22,90 @@ function descomponerDinero(cantidad) {
 
     return cantidad === 0 ? resultado : null;
 }
+
+function devolverDinero(cantidad) {
+
+    if (cantidad === 0) {
+        document.getElementById("bill-output").textContent = "";
+        document.getElementById("coin-output").textContent = "";
+        return true;
+    }
+
+    if (cantidad < 0 || cantidad % 100 !== 0) {
+        mostrarMensaje("Valor de devolución no válido");
+        return false;
+    }
+
+    const valores = [10000, 5000, 2000, 500, 200, 100];
+    let objetivo = cantidad / 100;
+
+    let posibles = Array(objetivo + 1).fill(false);
+    let anterior = Array(objetivo + 1).fill(null);
+
+    posibles[0] = true;
+
+    // Buscar una combinación disponible
+    for (let valor of valores) {
+
+        let disponibles = stockDinero["$" + valor];
+
+        for (let i = 0; i < disponibles; i++) {
+
+            for (let total = objetivo; total >= valor / 100; total--) {
+
+                if (!posibles[total] && posibles[total - valor / 100]) {
+                    posibles[total] = true;
+                    anterior[total] = {
+                        anterior: total - valor / 100,
+                        valor: valor
+                    };
+                }
+            }
+        }
+    }
+
+    if (!posibles[objetivo]) {
+        mostrarMensaje("No hay cambio suficiente");
+        return false;
+    }
+
+    let devolucion = {};
+    let restante = objetivo;
+
+    while (restante > 0) {
+        let paso = anterior[restante];
+
+        devolucion[paso.valor] = (devolucion[paso.valor] || 0) + 1;
+        restante = paso.anterior;
+    }
+
+    let billetes = "";
+    let monedas = "";
+
+    // Descontar el dinero entregado
+    for (let valor of valores) {
+
+        let cantidadEntregada = devolucion[valor] || 0;
+
+        stockDinero["$" + valor] -= cantidadEntregada;
+
+        if (cantidadEntregada > 0) {
+            if (valor >= 2000) {
+                billetes += cantidadEntregada + " x $" + valor + " ";
+            } else {
+                monedas += cantidadEntregada + " x $" + valor + " ";
+            }
+        }
+    }
+
+    document.getElementById("bill-output").textContent = billetes;
+    document.getElementById("coin-output").textContent = monedas;
+
+    actualizarInventario();
+
+    return true;
+}
+
 function cancelarCompra() {
 
     let dineroDevuelto = saldo;
