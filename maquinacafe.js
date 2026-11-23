@@ -183,6 +183,6 @@ function comprarBebida(precio, dineroIngresado) {
           "\nAquí está su bebida.");
     menuPrincipal();
 }
-menuPrincipal();
+
 
 
