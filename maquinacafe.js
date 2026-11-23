@@ -10,6 +10,14 @@ let stock = { cafe: 3, leche: 3000, choco: 3600, te: 12, vasos: 10, azu:10 };
 const DineroMin = { "$2000": 15, "$5000": 4, "$10000": 3, "$100": 10, "$200": 20, "$500": 20};
 let stockDinero = { $2000: 1, $5000: 4, $10000: 2, $100: 10, $200: 0, $500: 20};
 
+function fueraDeServicio() {
+    if (stock.cafe < stockMin.cafe || stock.leche < stockMin.leche || stock.choco < stockMin.choco || stock.te < stockMin.te || stock.vasos < stockMin.vasos || stock.azu < stockMin.azu) {
+        alert("No hay ingredientes o di suficientes. La máquina está fuera de servicio. ");
+        return true;
+    }
+    return false;
+}
+
 function menuPrincipal() {
     let usuario = prompt ("1. Cliente \n 2. Distribuidor");
 
@@ -122,6 +130,10 @@ const nivelAzucar = () => {
     }
 
 function menuCliente(){
+    if (fueraDeServicio()) {
+        menuPrincipal();
+        return;
+    }
     let dineroIngresado = Number(prompt("Ingrese el dinero para pagar la bebida:"));
     elegirBebida(dineroIngresado);
 }
@@ -156,6 +168,7 @@ function elegirBebida(dineroIngresado){
             break;
     }
 }
+
 
 function comprarBebida(precio, dineroIngresado) {
     while (dineroIngresado < precio) {
