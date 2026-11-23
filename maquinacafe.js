@@ -8,7 +8,7 @@ const stockMin = { cafe: 3, leche: 15, choco: 18, te: 12, vasos: 1, azu: 10 };
 //let stockRellenado = { cafe: 500, leche: 3000, choco: 3600, te: 2400, vasos: 200, azu:2000 };
 let stock = { cafe: 3, leche: 3000, choco: 3600, te: 12, vasos: 10, azu:10 };
 const DineroMin = { "$2000": 15, "$5000": 4, "$10000": 3, "$100": 10, "$200": 20, "$500": 20};
-let stockDinero = { $2000: 1, $5000: 4, $10000: 2, $100: 10, $200: 0, $500: 20};
+let stockDinero = {...DineroMin};
 
 function descomponerDinero(cantidad) {
     const valores = [10000, 5000, 2000, 500, 200, 100];
@@ -31,12 +31,12 @@ function actualizarInventario() {
         chocolate: stock.choco,
         tea: stock.te,
         cups: stock.vasos,
-        b10000: stockDinero[10000],
-        b5000: stockDinero[5000],
-        b2000: stockDinero[2000],
-        c500: stockDinero[500],
-        c200: stockDinero[200],
-        c100: stockDinero[100]
+        b10000: stockDinero["$10000"],
+        b5000: stockDinero["$5000"],
+        b2000: stockDinero["$2000"],
+        c500: stockDinero["$500"],
+        c200: stockDinero["$200"],
+        c100: stockDinero["$100"]
     };
 
     document.querySelectorAll("#admin-rows tr").forEach(fila => {
@@ -278,27 +278,41 @@ document.getElementById("balance-form").addEventListener("submit", function(even
 
     let dinero = Number(document.getElementById("balance-input").value);
 
-    if (dinero > 0) {
+    if (dinero <= 0 || !Number.isInteger(dinero) || dinero % 100 !== 0) {
+        mostrarMensaje("Ingresa un valor válido, múltiplo de $100");
+        return;
+    }
+
     let restante = dinero;
     const valores = [10000, 5000, 2000, 500, 200, 100];
+    let ingreso = {};
 
+    // Determinar las denominaciones del dinero ingresado
     for (let valor of valores) {
         let cantidad = Math.floor(restante / valor);
-        stockDinero[valor] = (stockDinero[valor] || 0) + cantidad;
+
+        ingreso[valor] = cantidad;
         restante %= valor;
     }
 
+    // Comprobar que todo el valor pueda representarse
     if (restante > 0) {
         mostrarMensaje("Valor no válido");
         return;
     }
 
+    // Sumar el dinero al inventario
+    for (let valor of valores) {
+        stockDinero["$" + valor] += ingreso[valor];
+    }
+
+    // Actualizar el saldo del usuario
     saldo += dinero;
+
     document.getElementById("credit").textContent = "$" + saldo;
     document.getElementById("balance-input").value = "";
 
     actualizarInventario();
-}
 });
 
 let azucarElegida=0;
