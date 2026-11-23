@@ -182,13 +182,13 @@ body {
 .shelf__stock {
   grid-column: 1 / -1;
   margin-top: 2px;
-  color: var(--gray-600);
+  color: var(---600);
   font-size: 0.7rem;
 }
 
 /* Estado agotado (se puede activar desde JS) */
 .shelf.is-empty .product { opacity: 0.15; }
-.shelf.is-empty .shelf__info { background: var(--gray-300); color: var(--gray-600); }
+.shelf.is-empty .shelf__info { background: var(---300); color: var(---600); }
 
 /* ---------- Producto: un simple cuadrado ---------- */
 .product {
@@ -219,7 +219,7 @@ body {
   padding: 10px;
   background: var(--color-screen-bg);
   color: var(--color-screen-text);
-  border: 3px solid var(--gray-600);
+  border: 3px solid var(---600);
   border-radius: var(--radius-sm);
   font-family: "Courier New", monospace;
   box-shadow: inset 0 0 12px var(--color-shadow);
@@ -261,13 +261,13 @@ body {
   font: 700 0.9rem/1 "Courier New", monospace;
 }
 .balance-form__input:focus {
-  outline: 2px solid var(--gray-050);
+  outline: 2px solid var(---050);
   outline-offset: 1px;
 }
 
 .balance-form__submit {
   padding: 7px 10px;
-  background: var(--gray-300);
+  background: var(---300);
   color: var(--color-text-dark);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-sm);
@@ -275,10 +275,10 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   cursor: pointer;
-  box-shadow: 0 3px 0 var(--gray-600);
+  box-shadow: 0 3px 0 var(---600);
 }
-.balance-form__submit:hover  { background: var(--gray-100); }
-.balance-form__submit:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--gray-600); }
+.balance-form__submit:hover  { background: var(---100); }
+.balance-form__submit:active { transform: translateY(2px); box-shadow: 0 1px 0 var(---600); }
 
 /* ---------- Teclado ---------- */
 .keypad {
@@ -297,26 +297,26 @@ body {
   border-radius: var(--radius-sm);
   font: 800 1.2rem/1 inherit;
   cursor: pointer;
-  box-shadow: 0 4px 0 var(--gray-500);
+  box-shadow: 0 4px 0 var(---500);
   transition: transform 0.08s, box-shadow 0.08s, background 0.15s;
 }
 .key:hover  { background: var(--color-key-hover); }
 .key:active {
   background: var(--color-key-active);
   transform: translateY(3px);
-  box-shadow: 0 1px 0 var(--gray-500);
+  box-shadow: 0 1px 0 var(---500);
 }
 .cancel {
-  background: var(--gray-700);
+  background: var(---700);
   color: var(--color-text-light);
 
-  .cancel:hover { background: var(--gray-600); }
+  .cancel:hover { background: var(---600); }
 }
 
 /* ---------- Botón devolver cambio ---------- */
 .return {
   padding: 8px;
-  background: var(--gray-500);
+  background: var(---500);
   color: var(--color-text-light);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-sm);
@@ -324,10 +324,10 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 3px 0 var(--gray-900);
+  box-shadow: 0 3px 0 var(---900);
 }
-.return:hover  { background: var(--gray-400); }
-.return:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--gray-900); }
+.return:hover  { background: var(---400); }
+.return:active { transform: translateY(2px); box-shadow: 0 1px 0 var(---900); }
 
 /* ---------- Salidas de billetes y monedas ---------- */
 .outputs {
@@ -355,7 +355,7 @@ body {
 .output__opening {
   display: block;
   background: var(--color-slot);
-  border: 2px solid var(--gray-500);
+  border: 2px solid var(---500);
   box-shadow: inset 0 3px 6px var(--color-shadow);
 }
 
@@ -403,7 +403,7 @@ body {
   width: 18px;
   height: 14px;
   margin-bottom: -10px;
-  background: var(--gray-300);
+  background: var(---300);
   border: 2px solid var(--color-border);
   border-radius: 0 0 6px 6px;
   position: relative;
@@ -415,7 +415,7 @@ body {
   position: relative;
   width: 100%;
   background: var(--color-slot);
-  border: 3px solid var(--gray-600);
+  border: 3px solid var(---600);
   border-radius: var(--radius-sm);
   box-shadow: inset 0 10px 18px var(--color-shadow);
 }
@@ -432,8 +432,8 @@ body {
 .dispenser__grate {
   height: 14px;
   background: repeating-linear-gradient(90deg,
-    var(--gray-500) 0 6px,
-    var(--gray-800) 6px 12px);
+    var(---500) 0 6px,
+    var(---800) 6px 12px);
   border-top: 2px solid var(--color-border);
 }
 
@@ -479,14 +479,61 @@ body {
 .sugar__btn {
   width: 34px;
   height: 30px;
-  background: var(--gray-300);
+  background: var(---300);
   color: var(--color-text-dark);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-sm);
   font: 800 1.1rem/1 inherit;
   cursor: pointer;
-  box-shadow: 0 3px 0 var(--gray-600);
+  box-shadow: 0 3px 0 var(---600);
 }
-.sugar__btn:hover { background: var(--gray-100); }
-.sugar__btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--gray-600); }
+.sugar__btn:hover { background: var(---100); }
+.sugar__btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(---600); }
+
+.admin {
+  width: 100%;
+  max-width: var(--machine-width);
+  margin: 16px auto 0;
+  padding: 10px 14px;
+  background: var(--color-machine-dark);
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+}
+.admin summary { cursor: pointer; font-weight: 700; letter-spacing: 0.05em; }
+.admin__login { display: flex; gap: 8px; align-items: center; margin-top: 10px; }
+.admin__login[hidden], #admin-panel[hidden] { display: none; }
+.admin input {
+  padding: 6px 8px;
+  background: var(--color-input-bg);
+  color: var(--color-text-dark);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font: 700 0.85rem/1 "Courier New", monospace;
+}
+.admin button {
+  padding: 6px 10px;
+  background: var(---300);
+  color: var(--color-text-dark);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font: 700 0.72rem/1 inherit;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.admin button:hover { background: var(---100); }
+.admin__alert { margin: 10px 0; padding: 8px; background: var(---700); border-radius: var(--radius-sm); }
+.admin__alert.is-alert { background: var(---050); color: var(--color-text-dark); font-weight: 800; }
+.admin__scroll { overflow-x: auto; }
+.admin__table { width: 100%; border-collapse: collapse; }
+.admin__table th, .admin__table td {
+  padding: 5px 6px;
+  text-align: left;
+  border-bottom: 1px solid var(---600);
+  white-space: nowrap;
+}
+.admin__table input { width: 80px; }
+.admin__table .is-low { font-weight: 800; text-decoration: underline wavy; }
+.admin__actions { display: flex; gap: 8px; margin-top: 10px; }
+.admin__msg { min-height: 1.2em; margin: 8px 0 0; color: var(--color-text-muted); }
 
