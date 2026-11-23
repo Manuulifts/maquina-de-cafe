@@ -199,3 +199,11 @@ document.getElementById("balance-form").addEventListener("submit", function(even
         document.getElementById("balance-input").value = "";
     }
 });
+
+document.querySelectorAll("[data-select]").forEach(function(button) {
+    button.addEventListener("click", function() {
+        let bebida = button.getAttribute("data-select");
+
+        elegirBebida(saldo, bebida);
+    });
+});
