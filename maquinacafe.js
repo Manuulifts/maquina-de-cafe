@@ -156,12 +156,34 @@ function comprarBebida(precio, dineroIngresado) {
         return;
     }
 
-    saldo = dineroIngresado - precio;
+    let cambio = dineroIngresado - precio;
+    const valores = [20000, 10000, 5000, 2000, 1000, 500, 200, 100];
 
-    document.getElementById("credit").textContent = "$" + saldo;
+    let billetes = "";
+    let monedas = "";
 
-    mostrarMensaje("¡Compra exitosa! Disfruta tu bebida. Azúcar: " + azucarElegida + " g");
+    for (let i = 0; i < valores.length; i++) {
+        if (cambio >= valores[i]) {
+            let cantidad = Math.floor(cambio / valores[i]);
+            cambio = cambio % valores[i];
+
+            if (valores[i] >= 2000) {
+                billetes += cantidad + " x $" + valores[i] + " ";
+            } else {
+                monedas += cantidad + " x $" + valores[i] + " ";
+            }
+        }
+    }
+
+    document.getElementById("bill-output").textContent = billetes || "Sin billetes";
+    document.getElementById("coin-output").textContent = monedas || "Sin monedas";
+
+    saldo = 0;
+    document.getElementById("credit").textContent = "$0";
+
+    mostrarMensaje("¡Compra exitosa!\n Azúcar: " + azucarElegida + " g. \nDisfruta tu bebida!");
 }
+
 
 let saldo = 0;
 
