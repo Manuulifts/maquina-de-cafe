@@ -1,10 +1,9 @@
 //Precio de cada café
 
-const precioBebidas = {precioTinto: 2000, precioCafe: 2500, precioCapuchino: 3500, precioMocaccino: 4000, precioChocolate: 3500, precioTe: 2500};
+const precioBebidas = {precioTinto: 2000, precioCafe: 2500, precioCapuchino: 3500, precioMocaccino: 4000, precioChocolate: 3000, precioTe: 2500};
 let ingredienteslleno = false; 
 let dinerolleno = false; 
 
- 
 const stockMin = { cafe: 3, leche: 15, choco: 18, te: 12, vasos: 1, azu: 10 };
 //let stockRellenado = { cafe: 500, leche: 3000, choco: 3600, te: 2400, vasos: 200, azu:2000 };
 let stock = { cafe: 3, leche: 3000, choco: 3600, te: 12, vasos: 10, azu:10 };
@@ -24,8 +23,8 @@ function menuPrincipal() {
         default:
         alert("Opción no válida.");
         break;
-}
     }
+        }
 
 function menuDistribuidor() {
     if (ingredienteslleno==true&&dinerolleno==true){ 
@@ -81,7 +80,7 @@ function rellenarIngredientes() {
     ingredienteslleno = true;
     alert("Ingredientes rellenados correctamente. \n"+"Café: " + stock.cafe + "\n" +"Leche: " + stock.leche + "\n" +"Chocolate: " + stock.choco + "\n" +"Té: " + stock.te + "\n" +"Vasos: " + stock.vasos + "\n" +"Azúcar: " + stock.azu);
     menuDistribuidor();       
-}
+    }
 function rellenarDinero() {
     stockDinero.$2000 = 15;
     stockDinero.$5000 = 4;
@@ -101,7 +100,7 @@ const recetas = {
     mocaccino: { cafe: 2.5, leche: 10, choco: 10, te: 0, agua: 150},
     te: { cafe: 0, leche: 0, choco: 0, te: 10,agua: 150},
     chocolate: { cafe: 0, leche: 6, choco: 22, te: 0, agua: 150}
-};
+    }
 
 const nivelAzucar = () => {
     const niveles = ["Sin azúcar", "Poca azúcar", "Normal", "Doble azúcar"];
@@ -120,45 +119,50 @@ const nivelAzucar = () => {
             return nivelAzucar();
             
     }  
-}
+    }
+
 function menuCliente(){
-    let eleccion= prompt ("Hola. \nPor favor, seleccione una bebida: \n1. Tinto.............. $2.000\n2. Café con leche..... $2.500\n3. Capuchino.......... $3.500\n4. Mocaccino.......... $4.000\n5. Té................. $2.500\n6. Chocolate.......... $3.000\n7. Salir");
+    let dineroIngresado = Number(prompt("Ingrese el dinero para pagar la bebida:"));
+    elegirBebida(dineroIngresado);
+}
+
+function elegirBebida(dineroIngresado){
+    let eleccion = prompt("Saldo: $" + dineroIngresado + "\nPor favor, seleccione una bebida: \n1. Tinto.............. $2.000\n2. Café con leche..... $2.500\n3. Capuchino.......... $3.500\n4. Mocaccino.......... $4.000\n5. Té................. $2.500\n6. Chocolate.......... $3.000\n7. Salir");
     switch (eleccion) {
         case "1":
-            comprarBebida(precioBebidas.precioTinto);
+            comprarBebida(precioBebidas.precioTinto,dineroIngresado);
             break;
         case "2":
-            comprarBebida(precioBebidas.precioCafe);
+            comprarBebida(precioBebidas.precioCafe,dineroIngresado);
             break;
         case "3":
-            comprarBebida(precioBebidas.precioCapuchino);
+            comprarBebida(precioBebidas.precioCapuchino,dineroIngresado);
             break;
         case "4":
-            comprarBebida(precioBebidas.precioMocaccino);
+            comprarBebida(precioBebidas.precioMocaccino,dineroIngresado);
             break;
         case "5":
-            comprarBebida(precioBebidas.precioTe);
+            comprarBebida(precioBebidas.precioTe,dineroIngresado);
             break; 
         case "6":
-            comprarBebida(precioBebidas.precioChocolate);
+            comprarBebida(precioBebidas.precioChocolate,dineroIngresado);
             break;
         case "7":
             alert("Gracias por su visita. ¡Hasta luego!");
             break; 
         default:
             alert("Opción no válida. Por favor, seleccione una bebida del 1 al 7.");
-            menuCliente();
+            elegirBebida(dineroIngresado);
             break;
-}
+    }
 }
 
-function comprarBebida(precio) {
-    let azucarElegida = nivelAzucar();
-    let dineroIngresado = Number(prompt("Ingrese el dinero para pagar la bebida:"));
+function comprarBebida(precio, dineroIngresado) {
     while (dineroIngresado < precio) {
         alert("Dinero insuficiente. Le faltan $" + (precio - dineroIngresado));
         dineroIngresado += Number(prompt("Ingrese más dinero:"));
     }
+    let azucarElegida = nivelAzucar();
     const valores = [20000, 10000, 5000, 2000, 1000, 500, 200, 100];
     let cambio = dineroIngresado - precio;
     if (cambio > 0) {
