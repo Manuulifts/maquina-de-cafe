@@ -10,6 +10,19 @@ let stock = { cafe: 3, leche: 3000, choco: 3600, te: 12, vasos: 10, azu:10 };
 const DineroMin = { "$2000": 15, "$5000": 4, "$10000": 3, "$100": 10, "$200": 20, "$500": 20};
 let stockDinero = { $2000: 1, $5000: 4, $10000: 2, $100: 10, $200: 0, $500: 20};
 
+function descomponerDinero(cantidad) {
+    const valores = [10000, 5000, 2000, 500, 200, 100];
+    let resultado = {};
+
+    for (let valor of valores) {
+        let unidades = Math.floor(cantidad / valor);
+        resultado[valor] = unidades;
+        cantidad %= valor;
+    }
+
+    return cantidad === 0 ? resultado : null;
+}
+
 function actualizarInventario() {
     const equivalencias = {
         coffee: stock.cafe,
@@ -266,11 +279,26 @@ document.getElementById("balance-form").addEventListener("submit", function(even
     let dinero = Number(document.getElementById("balance-input").value);
 
     if (dinero > 0) {
-        saldo += dinero;
-        document.getElementById("credit").textContent = "$" + saldo;
+    let restante = dinero;
+    const valores = [10000, 5000, 2000, 500, 200, 100];
 
-        document.getElementById("balance-input").value = "";
+    for (let valor of valores) {
+        let cantidad = Math.floor(restante / valor);
+        stockDinero[valor] = (stockDinero[valor] || 0) + cantidad;
+        restante %= valor;
     }
+
+    if (restante > 0) {
+        mostrarMensaje("Valor no válido");
+        return;
+    }
+
+    saldo += dinero;
+    document.getElementById("credit").textContent = "$" + saldo;
+    document.getElementById("balance-input").value = "";
+
+    actualizarInventario();
+}
 });
 
 let azucarElegida=0;
