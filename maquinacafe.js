@@ -109,12 +109,11 @@ const recetas = {
     }
 
 const Azucar = () => {
-    let eleccionAzucar = prompt("Seleccione la cantidad de azúcar que desea:")
-    let azucar = Number(eleccionAzucar);
+    let azucar = Number(prompt("Seleccione la cantidad de azúcar que desea:"));
     while (azucar < 0 || azucar > 10 || !Number.isInteger(azucar)){
-        eleccionAzucar = prompt("Cantidad no válida. Por favor, seleccione una cantidad de 0 a 10:");
+        azucar = Number(prompt("Cantidad no válida. Por favor, seleccione una cantidad de 0 a 10:"));
     }
-    return eleccionAzucar;
+    return azucar;
     }
 
 function menuCliente(){
@@ -163,7 +162,7 @@ function comprarBebida(precio, dineroIngresado) {
         alert("Dinero insuficiente. Le faltan $" + (precio - dineroIngresado));
         dineroIngresado += Number(prompt("Ingrese más dinero:"));
     }
-    let azucarElegida = nivelAzucar();
+    let azucarElegida = Azucar();
     const valores = [20000, 10000, 5000, 2000, 1000, 500, 200, 100];
     let cambio = dineroIngresado - precio;
     if (cambio > 0) {
@@ -185,3 +184,5 @@ function comprarBebida(precio, dineroIngresado) {
     menuPrincipal();
 }
 menuPrincipal();
+
+
