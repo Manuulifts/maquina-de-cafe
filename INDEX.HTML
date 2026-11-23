@@ -6,7 +6,6 @@
   <title>Máquina de café</title>
   <link rel="stylesheet" href="styles.css">
 
-<body>
 
   <main class="machine">
 
@@ -176,10 +175,85 @@
           <table class="admin__table">
             <thead>
               <tr>
-                <th>Elemento</th><th>Actual</th><th>Mín.</th><th>Máx.</th><th>Agregar</th><th></th>
+                <th>Elemento</th><th>Actual</th><th>Mín.</th><th>Máx.</th><th></th>
               </tr>
             </thead>
-            <tbody id="admin-rows"><tr data-key="coffee"><td>Café (g)</td><td data-cur="">1000</td><td>30</td><td>1000</td><td><input type="number" min="1" step="1" aria-label="Cantidad a agregar de Café (g)"></td><td><button type="button" data-add="">Agregar</button></td></tr><tr data-key="milk"><td>Leche (g)</td><td data-cur="">2000</td><td>100</td><td>2000</td><td><input type="number" min="1" step="1" aria-label="Cantidad a agregar de Leche (g)"></td><td><button type="button" data-add="">Agregar</button></td></tr><tr data-key="sugar"><td>Azúcar (g)</td><td data-cur="">1000</td><td>50</td><td>1000</td><td><input type="number" min="1" step="1" aria-label="Cantidad a agregar de Azúcar (g)"></td><td><button type="button" data-add="">Agregar</button></td></tr><tr data-key="chocolate"><td>Chocolate en polvo (g)</td><td data-cur="">1500</td><td>100</td><td>1500</td><td><input type="number" min="1" step="1" aria-label="Cantidad a agregar de Chocolate en polvo (g)"></td><td><button type="button" data-add="">Agregar</button></td></tr><tr data-key="tea"><td>Té (g)</td><td data-cur="">600</td><td>50</td><td>600</td><td><input type="number" min="1" step="1" aria-label="Cantidad a agregar de Té (g)"></td><td><button type="button" data-add="">Agregar</button></td></tr><tr data-key="cups"><td>Vasos 6 oz</td><td data-cur="">200</td><td>10</td><td>200</td><td><input type="number" min="1" step="1" aria-label="Cantidad a agregar de Vasos 6 oz"></td><td><button type="button" data-add="">Agregar</button></td></tr><tr data-key="b10000"><td>Billetes de $10.000</td><td data-cur="">50</td><td>5</td><td>50</td><td><input type="number" min="1" step="1" aria-label="Cantidad a agregar de Billetes de $10.000"></td><td><button type="button" data-add="">Agregar</button></td></tr><tr data-key="b5000"><td>Billetes de $5.000</td><td data-cur="">50</td><td>5</td><td>50</td><td><input type="number" min="1" step="1" aria-label="Cantidad a agregar de Billetes de $5.000"></td><td><button type="button" data-add="">Agregar</button></td></tr><tr data-key="b2000"><td>Billetes de $2.000</td><td data-cur="">50</td><td>5</td><td>50</td><td><input type="number" min="1" step="1" aria-label="Cantidad a agregar de Billetes de $2.000"></td><td><button type="button" data-add="">Agregar</button></td></tr><tr data-key="c500"><td>Monedas de $500</td><td data-cur="">100</td><td>10</td><td>100</td><td><input type="number" min="1" step="1" aria-label="Cantidad a agregar de Monedas de $500"></td><td><button type="button" data-add="">Agregar</button></td></tr><tr data-key="c200"><td>Monedas de $200</td><td data-cur="">100</td><td>10</td><td>100</td><td><input type="number" min="1" step="1" aria-label="Cantidad a agregar de Monedas de $200"></td><td><button type="button" data-add="">Agregar</button></td></tr><tr data-key="c100"><td>Monedas de $100</td><td data-cur="">100</td><td>10</td><td>100</td><td><input type="number" min="1" step="1" aria-label="Cantidad a agregar de Monedas de $100"></td><td><button type="button" data-add="">Agregar</button></td></tr></tbody>
+           
+<tbody id="admin-rows">
+    <tr data-key="coffee">
+        <td>Café (g)</td>
+        <td data-cur="">0</td>
+        <td>30</td>
+        <td>1000</td>
+    </tr>
+    <tr data-key="milk">
+        <td>Leche (g)</td>
+        <td data-cur="">0</td>
+        <td>100</td>
+        <td>2000</td>
+    </tr>
+    <tr data-key="sugar">
+        <td>Azúcar (g)</td>
+        <td data-cur="">0</td>
+        <td>50</td>
+        <td>1000</td>
+    </tr>
+    <tr data-key="chocolate">
+        <td>Chocolate en polvo (g)</td>
+        <td data-cur="">0</td>
+        <td>100</td>
+        <td>1500</td>
+    </tr>
+    <tr data-key="tea">
+        <td>Té (g)</td>
+        <td data-cur="">0</td>
+        <td>50</td>
+        <td>600</td>
+    </tr>
+    <tr data-key="cups">
+        <td>Vasos 6 oz</td>
+        <td data-cur="">0</td>
+        <td>10</td>
+        <td>200</td>
+    </tr>
+    <tr data-key="b10000">
+        <td>Billetes de $10.000</td>
+        <td data-cur="">0</td>
+        <td>5</td>
+        <td>50</td>
+    </tr>
+    <tr data-key="b5000">
+        <td>Billetes de $5.000</td>
+        <td data-cur="">0</td>
+        <td>5</td>
+        <td>50</td>
+    </tr>
+    <tr data-key="b2000">
+        <td>Billetes de $2.000</td>
+        <td data-cur="">0</td>
+        <td>5</td>
+        <td>50</td>
+    </tr>
+    <tr data-key="c500">
+        <td>Monedas de $500</td>
+        <td data-cur="">0</td>
+        <td>10</td>
+        <td>100</td>
+    </tr>
+    <tr data-key="c200">
+        <td>Monedas de $200</td>
+        <td data-cur="">0</td>
+        <td>10</td>
+        <td>100</td>
+    </tr>
+    <tr data-key="c100">
+        <td>Monedas de $100</td>
+        <td data-cur="">0</td>
+        <td>10</td>
+        <td>100</td>
+    </tr>
+</tbody>
+
           </table>
         </div>
         <div class="admin__actions">
