@@ -5,7 +5,7 @@ let ingredienteslleno = false;
 let dinerolleno = false; 
 
 const stockMin = { cafe: 3, leche: 15, choco: 18, te: 12, vasos: 1, azu: 10 };
-//let stockRellenado = { cafe: 500, leche: 3000, choco: 3600, te: 2400, vasos: 200, azu:2000 };
+let stockRellenado = { cafe: 500, leche: 3000, choco: 3600, te: 2400, vasos: 200, azu:2000 };
 let stock = { cafe: 3, leche: 3000, choco: 3600, te: 12, vasos: 10, azu:10 };
 const DineroMin = { "$2000": 15, "$5000": 4, "$10000": 3, "$100": 10, "$200": 20, "$500": 20};
 let stockDinero = {...DineroMin};
@@ -161,6 +161,16 @@ document.getElementById("admin-login").addEventListener("submit", function(event
     } else {
         document.getElementById("admin-alert").textContent = "PIN incorrecto";
     }
+});
+
+document.getElementById("admin-logout").addEventListener("click", function() {
+
+    document.getElementById("admin-panel").hidden = true;
+    document.getElementById("admin-login").hidden = false;
+
+    document.getElementById("admin-pin").value = "";
+    document.getElementById("admin-msg").textContent = "";
+
 });
 
 function fueraDeServicio() {
@@ -459,3 +469,14 @@ function mostrarMensaje(mensaje) {
     }, 2000);
 }
 
+function llenarAlMaximo() {
+
+    stock = { ...stockRellenado };
+
+    actualizarInventario();
+
+    document.getElementById("admin-msg").textContent =
+        "Inventario llenado al máximo.";
+
+}
+document.getElementById("admin-fill").addEventListener("click", llenarAlMaximo);
